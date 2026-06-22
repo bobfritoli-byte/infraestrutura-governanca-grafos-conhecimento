@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/pedro/ontologies/2022/11/untitled-ontology-2#"
+     xml:base="http://www.semanticweb.org/pedro/ontologies/2022/11/untitled-ontology-2"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasArea -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasArea"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasCity -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasCity"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasCountry -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasCountry"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasFundingOrganization -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasFundingOrganization"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasLocation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasLocation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasTargetAudience -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#hasTargetAudience"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#finishDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#finishDate"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#fundingOrganizationName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#fundingOrganizationName"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#fundingOrganizationSector -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#fundingOrganizationSector"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#initiativeDataSource -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#initiativeDataSource"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#initiativeName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#initiativeName"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#initiativeSocialmediaLink -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#initiativeSocialmediaLink"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#initiativeStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#initiativeStatus"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#organizationSector -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#organizationSector"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#startDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#startDate"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#status -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#status"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Area -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Area">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Location"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#City -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#City">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Location"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Community -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Community">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Initiative"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Conference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Conference">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Initiative"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Country -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Country"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Funding_Organization -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Funding_Organization"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Initiative -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Initiative"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Location -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Location"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Program -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Program">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Initiative"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Project -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Project">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Initiative"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Region -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Region">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Location"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#State -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#State">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Location"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceAge -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceAge">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Target_Audience"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceEducationalLevel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceEducationalLevel">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Target_Audience"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceGender -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceGender">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Target_Audience"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceRace -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceRace">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Target_Audience"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceStakeholders -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceStakeholders">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Target_Audience"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceVulnerableGroups -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#TargetAudienceVulnerableGroups">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Target_Audience"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Target_Audience -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Target_Audience"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Training -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Training">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#Initiative"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

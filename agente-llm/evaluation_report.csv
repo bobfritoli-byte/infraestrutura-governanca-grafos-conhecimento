@@ -1,0 +1,39 @@
+n,status,bindings,attempts,relaxed,elapsed,question
+1,OK ,154,1,False,1.73,Em quais países a política foi aplicada?
+2,OK ,381,1,False,1.01,Quais tipos de políticas/processos/práticas de gênero existem na América Latina?
+3,OK ,170,1,False,1.04,Como as políticas identificadas/analisadas estão promovendo a participação das mulheres em STEM?
+4,OK ,10,1,False,1.11,"Quais tipos de políticas/processos/práticas de gênero foram implementadas na Bolívia, Brasil e Peru desde 2015?"
+5,ERRO,0,1,False,0.16,Quais e quantas iniciativas são realizadas no Brasil?
+6,OK ,609,1,False,1.1,Quais fontes de dados são usadas para a iniciativa?
+7,ERRO,0,1,False,0.16,Quais são as redes sociais da iniciativa?
+8,ERRO,0,1,False,0.16,Quantas iniciativas são de programa?
+9,ERRO,0,1,False,0.15,As iniciativas são públicas ou privadas?
+10,ERRO,0,1,False,0.17,Quantas iniciativas são coordenadas por indivíduos?
+11,ERRO,0,1,False,0.13,Qual é o gênero social das pessoas que são responsáveis pelas iniciativas?
+12,ERRO,0,1,False,0.15,Qual é o objetivo da iniciativa?
+13,ERRO,0,1,False,0.14,Qual modalidade de iniciativa é usada para as ações/atividades?
+14,ERRO,0,1,False,0.11,Quais iniciativas atendem meninas ou adolescentes?
+15,ERRO,0,1,False,0.14,Qual é o gênero social do público-alvo atendido pela iniciativa?
+16,ERRO,0,1,False,0.14,Quais iniciativas atendem mulheres negras?
+17,ERRO,0,1,False,0.62,Quais iniciativas estão sendo desenvolvidas em um determinado nível escolar?
+18,ERRO,0,1,False,0.16,Quais iniciativas atendem a determinados grupos vulneráveis?
+19,ERRO,0,1,False,0.17,As iniciativas envolvem a comunidade escolar?
+20,ERRO,0,1,False,0.16,Quais e quantas iniciativas são realizadas em uma determinada cidade?
+21,ERRO,0,1,False,0.15,Quais e quantas iniciativas são realizadas em um determinado estado?
+22,ERRO,0,1,False,0.17,Quais e quantas iniciativas são realizadas em uma determinada área?
+23,ERRO,0,1,False,0.4,Quais e quantas iniciativas são realizadas em uma determinada região?
+24,ERRO,0,1,False,0.17,Quais e quantas iniciativas têm determinado alcance?
+25,ERRO,0,1,False,0.17,As iniciativas são financiadas?
+26,ERRO,0,1,False,0.16,Qual é o setor da(s) organização(ões) que financia(m) a iniciativa?
+27,ERRO,0,1,False,0.16,Quais iniciativas estão ativas?
+28,ERRO,0,1,False,0.14,As iniciativas já foram implementadas ou ainda estão em fase de design?
+29,ERRO,0,1,False,0.14,Quais iniciativas já foram concluídas?
+30,ERRO,0,1,False,0.14,Qual é o site (URL) da iniciativa?
+31,ERRO,0,1,False,0.16,Quantas iniciativas fazem parte de comunidades?
+32,ERRO,0,1,False,0.16,Positive contextual factors in countries analyzed
+33,ERRO,0,1,False,0.17,Negative contextual factors in institution activities
+34,ERRO,0,1,False,0.15,Contextual factors related to educational factors
+35,ERRO,0,1,False,0.15,Contextual factors impacting females positively/negatively
+36,ERRO,0,1,False,0.14,Impacts of a specific contextual factor
+37,ERRO,0,1,False,0.16,Impact types of contextual factor in Latin American institutions
+38,ERRO,0,1,False,0.16,"Contextual factors impacting specific impacts (e.g., leadership) in a country"

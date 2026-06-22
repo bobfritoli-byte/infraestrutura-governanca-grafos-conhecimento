@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELLAS Intelligence • Knowledge Graph Assistant</title>
+    <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.26.4/babel.min.js"></script>
+    <script src="https://unpkg.com/marked@12.0.2/marked.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f0f0f0;
+            --accent-primary: #4a2b4e;
+            --accent-secondary: #6b3e82;
+            --accent-tertiary: #2f2036;
+            --accent-ai: #9a5a3a;
+            --text-primary: #2c3e50;
+            --text-secondary: #495057;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --success: #28a745;
+            --warning: #f59e0b;
+            --error: #ff5672;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(74, 43, 78, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(230, 161, 122, 0.07) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(5%, -5%) rotate(120deg); }
+            66% { transform: translate(-5%, 5%) rotate(240deg); }
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar {
+            width: 320px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                var(--accent-primary) 50%,
+                transparent 100%);
+            opacity: 0.3;
+        }
+
+        @keyframes slideDown {
+            0%, 100% { transform: translateY(-100%); }
+            50% { transform: translateY(100%); }
+        }
+
+        .logo-section {
+            padding: 40px 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-img {
+            width: 190px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .logo-subtitle {
+            font-family: 'Roboto', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .stats-section {
+            padding: 30px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .stat-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(74, 43, 78, 0.06);
+            border-color: rgba(74, 43, 78, 0.25);
+            transform: translateX(5px);
+        }
+
+        .stat-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-tertiary);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .status-text {
+            font-family: 'Roboto', sans-serif;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .chat-header {
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-bottom: none;
+        }
+
+        .chat-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .chat-subtitle {
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .messages-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .messages-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .message {
+            display: flex;
+            gap: 20px;
+            animation: messageSlide 0.4s ease;
+        }
+
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #ff6b81, #ff5672);
+        }
+
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+        }
+
+        .message-content {
+            flex: 1;
+            padding-top: 8px;
+        }
+
+        .message-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .sparql-block {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--accent-primary);
+            overflow-x: auto;
+        }
+
+        .sparql-label {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sparql-label::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        /* 🤖 NOVO: Seção de Conhecimento da IA */
+        .llm-knowledge-container {
+            margin-top: 20px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(230, 161, 122, 0.12), rgba(255, 107, 129, 0.06));
+            border: 1px solid rgba(230, 161, 122, 0.4);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .llm-knowledge-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e6a17a, #ff6b81);
+        }
+
+        .llm-knowledge-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-ai);
+            font-weight: 500;
+        }
+
+        .llm-knowledge-header::before {
+            content: '🤖';
+            font-size: 20px;
+        }
+
+        .llm-knowledge-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+            padding: 5px 0;
+        }
+
+        .web-results-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(74, 43, 78, 0.05);
+            border: 1px solid rgba(74, 43, 78, 0.2);
+            border-radius: 12px;
+        }
+
+        .web-results-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+        }
+
+        .web-result-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .web-result-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateX(5px);
+            background: rgba(74, 43, 78, 0.03);
+        }
+
+        .web-result-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .web-result-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 12px;
+        }
+
+        .web-result-abstract {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .web-result-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            background: rgba(74, 43, 78, 0.1);
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+
+        .web-result-link:hover {
+            color: var(--accent-primary);
+            background: rgba(74, 43, 78, 0.2);
+            transform: translateX(3px);
+        }
+
+        .web-result-link::after {
+            content: '→';
+        }
+
+        .web-result-topics {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .web-result-topics-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .web-result-topic {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: rgba(74, 43, 78, 0.05);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .web-result-topic:hover {
+            background: rgba(74, 43, 78, 0.1);
+            transform: translateX(3px);
+        }
+
+        .web-result-topic a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .web-result-topic a:hover {
+            color: var(--accent-primary);
+        }
+
+        .message-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 12px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-area {
+            padding: 30px 40px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .provider-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .provider-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-right: 2px;
+        }
+
+        .provider-option {
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .provider-option:hover {
+            background: rgba(74, 43, 78, 0.06);
+        }
+
+        .provider-option.active {
+            background: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        .web-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 240px;
+            padding: 12px 20px;
+            background: rgba(74, 43, 78, 0.06);
+            border: 1px solid rgba(74, 43, 78, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .web-toggle-container:hover {
+            background: rgba(74, 43, 78, 0.1);
+        }
+
+        .web-toggle-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: 11px;
+            color: var(--text-secondary);
+            user-select: none;
+            flex: 1;
+        }
+
+        .web-toggle-switch {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background: var(--border-color);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .web-toggle-switch.active {
+            background: var(--accent-primary);
+        }
+
+        .web-toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .web-toggle-switch.active::after {
+            left: 22px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .input-container {
+            flex: 1;
+        }
+
+        .input-field {
+            width: 100%;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px 24px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: var(--text-primary);
+            resize: none;
+            transition: all 0.3s ease;
+            min-height: 60px;
+            max-height: 200px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(74, 43, 78, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-muted);
+        }
+
+        .send-button {
+            padding: 18px 32px;
+            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(74, 43, 78, 0.3);
+        }
+
+        .send-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(74, 43, 78, 0.4);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .web-search-button {
+            padding: 18px 32px;
+            background: transparent;
+            border: 2px solid var(--accent-primary);
+            border-radius: 12px;
+            color: var(--accent-primary);
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .web-search-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .web-search-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .loading-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 20px;
+        }
+
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            animation: loadingBounce 1.4s ease-in-out infinite;
+        }
+
+        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes loadingBounce {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .empty-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            opacity: 0.3;
+        }
+
+        .empty-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .empty-subtitle {
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            color: var(--text-muted);
+            max-width: 500px;
+        }
+
+        .suggestion-chips {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .chip {
+            padding: 10px 20px;
+            background: rgba(74, 43, 78, 0.06);
+            border: 1px solid rgba(74, 43, 78, 0.25);
+            border-radius: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chip:hover {
+            background: rgba(74, 43, 78, 0.12);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* === Painel de transparência do agente === */
+        .agent-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .agent-pill {
+            font-size: 11px;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 5px 12px;
+        }
+        .agent-pill-warn {
+            color: #9a5a3a;
+            background: rgba(230, 161, 122, 0.14);
+            border-color: rgba(230, 161, 122, 0.4);
+        }
+
+        /* === Renderização de Markdown nas respostas === */
+        .markdown-body { font-size: 16px; line-height: 1.7; color: var(--text-primary); }
+        .markdown-body > *:first-child { margin-top: 0; }
+        .markdown-body > *:last-child { margin-bottom: 0; }
+        .markdown-body p { margin: 0 0 12px; }
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3 { font-weight: 600; line-height: 1.3; margin: 18px 0 10px; color: var(--text-primary); }
+        .markdown-body h1 { font-size: 22px; }
+        .markdown-body h2 { font-size: 19px; }
+        .markdown-body h3 { font-size: 16px; }
+        .markdown-body ul,
+        .markdown-body ol { margin: 0 0 12px; padding-left: 22px; }
+        .markdown-body li { margin-bottom: 6px; }
+        .markdown-body a { color: var(--accent-primary); text-decoration: none; }
+        .markdown-body a:hover { text-decoration: underline; }
+        .markdown-body strong { font-weight: 600; color: var(--text-primary); }
+        .markdown-body code {
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 13px;
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .markdown-body pre {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 0 0 12px;
+        }
+        .markdown-body pre code { background: none; padding: 0; }
+        .markdown-body blockquote {
+            border-left: 3px solid var(--accent-primary);
+            margin: 0 0 12px;
+            padding: 4px 16px;
+            color: var(--text-secondary);
+        }
+        .markdown-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 4px 0 14px;
+            font-size: 14px;
+        }
+        .markdown-body th,
+        .markdown-body td {
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            text-align: left;
+        }
+        .markdown-body th {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .markdown-body tr:nth-child(even) td { background: rgba(74, 43, 78, 0.03); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel" data-presets="react">
+        const { useState, useEffect, useRef } = React;
+
+        const API_URL = 'http://localhost:5000';
+
+        // Renderiza Markdown (tabelas, listas, títulos) com segurança básica.
+        // Escapa <, > e & ANTES do parse: impede HTML cru e preserva nomes
+        // do ELLAS como "#include <girls>" (que senão sumiriam como "tag").
+        const escapeHtml = (s) => (s || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+
+        const renderMarkdown = (text) => {
+            try {
+                return { __html: marked.parse(escapeHtml(text), { breaks: true, gfm: true }) };
+            } catch (e) {
+                return { __html: escapeHtml(text) };
+            }
+        };
+
+        function App() {
+            const [messages, setMessages] = useState([]);
+            const [input, setInput] = useState('');
+            const [isLoading, setIsLoading] = useState(false);
+            const [webSearchEnabled, setWebSearchEnabled] = useState(true);
+            const [provider, setProvider] = useState('anthropic'); // 'anthropic' (Haiku) | 'ollama' (local) | 'groq'
+            const [stats, setStats] = useState({
+                totalQueries: 0,
+                avgResponseTime: 0,
+                successRate: 100
+            });
+            const messagesEndRef = useRef(null);
+            const inputRef = useRef(null);
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+            };
+
+            useEffect(() => {
+                scrollToBottom();
+            }, [messages]);
+
+            const suggestions = [
+                "Quais iniciativas estão ativas?",
+                "Quais iniciativas atendem meninas ou adolescentes?",
+                "As iniciativas são financiadas?",
+                "Quantas iniciativas existem no Brasil?"
+            ];
+
+            const handleSend = async () => {
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = {
+                    id: Date.now(),
+                    type: 'user',
+                    text: input,
+                    timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+                };
+
+                setMessages(prev => [...prev, userMessage]);
+                setInput('');
+                setIsLoading(true);
+
+                try {
+                    const response = await fetch(`${API_URL}/api/query`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            question: input,
+                            web_search: webSearchEnabled,
+                            provider: provider
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    const assistantMessage = {
+                        id: Date.now() + 1,
+                        type: 'assistant',
+                        text: data.success ? data.answer : data.message,
+                        sparql: data.sparql,
+                        generationTime: data.generation_time,
+                        success: data.success,
+                        agent: data.agent,
+                        provider: data.provider,
+                        webSearchPerformed: data.web_search_performed,
+                        webResults: data.web_results,
+                        timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+                    };
+
+                    setMessages(prev => [...prev, assistantMessage]);
+
+                    setStats(prev => ({
+                        totalQueries: prev.totalQueries + 1,
+                        avgResponseTime: ((prev.avgResponseTime * prev.totalQueries) + (data.generation_time || 0)) / (prev.totalQueries + 1),
+                        successRate: data.success ? 
+                            ((prev.successRate * prev.totalQueries) + 100) / (prev.totalQueries + 1) :
+                            ((prev.successRate * prev.totalQueries)) / (prev.totalQueries + 1)
+                    }));
+
+                } catch (error) {
+                    const errorMessage = {
+                        id: Date.now() + 1,
+                        type: 'assistant',
+                        text: `Erro ao conectar com o servidor: ${error.message}`,
+                        success: false,
+                        timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+                    };
+                    setMessages(prev => [...prev, errorMessage]);
+                }
+
+                setIsLoading(false);
+            };
+
+            const handleWebSearchOnly = async () => {
+                if (!input.trim() || isLoading) return;
+
+                const userMessage = {
+                    id: Date.now(),
+                    type: 'user',
+                    text: input + " (busca apenas na web)",
+                    timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+                };
+
+                setMessages(prev => [...prev, userMessage]);
+                setInput('');
+                setIsLoading(true);
+
+                try {
+                    const response = await fetch(`${API_URL}/api/direct-search`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ query: input, provider: provider })
+                    });
+
+                    const data = await response.json();
+
+                    const assistantMessage = {
+                        id: Date.now() + 1,
+                        type: 'assistant',
+                        text: data.success ? data.answer : data.message,
+                        sparql: null,
+                        success: data.success,
+                        webSearchPerformed: data.web_search_performed,
+                        webResults: data.web_results,
+                        timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+                    };
+
+                    setMessages(prev => [...prev, assistantMessage]);
+
+                    setStats(prev => ({
+                        totalQueries: prev.totalQueries + 1,
+                        avgResponseTime: prev.avgResponseTime,
+                        successRate: data.success ? 
+                            ((prev.successRate * prev.totalQueries) + 100) / (prev.totalQueries + 1) :
+                            ((prev.successRate * prev.totalQueries)) / (prev.totalQueries + 1)
+                    }));
+
+                } catch (error) {
+                    const errorMessage = {
+                        id: Date.now() + 1,
+                        type: 'assistant',
+                        text: `Erro ao conectar com o servidor: ${error.message}`,
+                        success: false,
+                        timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+                    };
+                    setMessages(prev => [...prev, errorMessage]);
+                }
+
+                setIsLoading(false);
+            };
+
+            const handleKeyPress = (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSend();
+                }
+            };
+
+            const handleSuggestionClick = (suggestion) => {
+                setInput(suggestion);
+                inputRef.current?.focus();
+            };
+
+            const toggleWebSearch = () => {
+                setWebSearchEnabled(!webSearchEnabled);
+            };
+
+            return (
+                <div className="container">
+                    <aside className="sidebar">
+                        <div className="logo-section">
+                            <img src="/logo_ellas.png" alt="ELLAS" className="logo-img" />
+                            <div className="logo-subtitle">Knowledge Graph Intelligence</div>
+                        </div>
+                        
+                        <div className="stats-section">
+                            <div className="stat-card">
+                                <div className="stat-label">Total de Consultas</div>
+                                <div className="stat-value">{stats.totalQueries}</div>
+                            </div>
+                            <div className="stat-card">
+                                <div className="stat-label">Tempo Médio</div>
+                                <div className="stat-value">{stats.avgResponseTime.toFixed(2)}s</div>
+                            </div>
+                            <div className="stat-card">
+                                <div className="stat-label">Taxa de Sucesso</div>
+                                <div className="stat-value">{stats.successRate.toFixed(0)}%</div>
+                            </div>
+                        </div>
+
+                        <div className="status-indicator">
+                            <div className="status-dot"></div>
+                            <div className="status-text">Sistema Operacional • 🤖 IA Ativa</div>
+                        </div>
+                    </aside>
+
+                    <main className="main-content">
+                        <header className="chat-header">
+                            <div className="chat-title">Assistente de Consulta ao Grafo</div>
+                            <div className="chat-subtitle">Powered by Groq AI • GraphDB • Web Search • LLM Knowledge</div>
+                        </header>
+
+                        <div className="messages-container">
+                            {messages.length === 0 ? (
+                                <div className="empty-state">
+                                    <div className="empty-icon">◈</div>
+                                    <div className="empty-title">Bem-vindo ao ELLAS Intelligence</div>
+                                    <div className="empty-subtitle">
+                                        Faça perguntas sobre iniciativas, países e dados do projeto ELLAS.
+                                        O sistema consulta o grafo, a IA e a web para trazer as melhores informações!
+                                    </div>
+                                    <div className="suggestion-chips">
+                                        {suggestions.map((suggestion, idx) => (
+                                            <div 
+                                                key={idx} 
+                                                className="chip"
+                                                onClick={() => handleSuggestionClick(suggestion)}
+                                            >
+                                                {suggestion}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                messages.map(message => (
+                                    <div key={message.id} className={`message ${message.type}`}>
+                                        <div className="message-avatar">
+                                            {message.type === 'user' ? 'U' : 'E'}
+                                        </div>
+                                        <div className="message-content">
+                                            {message.type === 'assistant' ? (
+                                                <div
+                                                    className="message-text markdown-body"
+                                                    dangerouslySetInnerHTML={renderMarkdown(message.text)}
+                                                />
+                                            ) : (
+                                                <div className="message-text">{message.text}</div>
+                                            )}
+
+                                            {message.agent && message.agent.matched_questions && message.agent.matched_questions.length > 0 && (
+                                                <div className="agent-panel">
+                                                    {message.provider && (
+                                                        <span className="agent-pill">{message.provider === 'ollama' ? '🖥️ Local' : message.provider === 'groq' ? '☁️ Groq' : '⚡ Haiku'}</span>
+                                                    )}
+                                                    <span className="agent-pill">🧭 Base: "{message.agent.matched_questions[0]}"</span>
+                                                    <span className="agent-pill">🔁 {message.agent.n_attempts} tentativa(s)</span>
+                                                    {message.agent.relaxed && (
+                                                        <span className="agent-pill agent-pill-warn">filtros relaxados</span>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            {message.sparql && (
+                                                <div className="sparql-block">
+                                                    <div className="sparql-label">Query SPARQL Gerada</div>
+                                                    <pre>{message.sparql}</pre>
+                                                </div>
+                                            )}
+
+                                            {message.webResults && message.webResults.length > 0 && (
+                                                <>
+                                                    {message.webResults.map((result, idx) => (
+                                                        <div key={idx}>
+                                                            {/* 🤖 NOVO: Card de Conhecimento da IA */}
+                                                            {result.llm_knowledge && (
+                                                                <div className="llm-knowledge-container">
+                                                                    <div className="llm-knowledge-header">
+                                                                        Conhecimento da IA
+                                                                    </div>
+                                                                    <div
+                                                                        className="llm-knowledge-text markdown-body"
+                                                                        dangerouslySetInnerHTML={renderMarkdown(result.llm_knowledge)}
+                                                                    />
+                                                                </div>
+                                                            )}
+
+                                                            {/* Seção Web tradicional */}
+                                                            {(result.abstract || result.related_topics.length > 0) && (
+                                                                <div className="web-results-container">
+                                                                    <div className="web-results-header">
+                                                                        🌐 Informações Adicionais da Web
+                                                                    </div>
+                                                                    <div className="web-result-card">
+                                                                        <div className="web-result-title">
+                                                                            {result.initiative}
+                                                                        </div>
+                                                                        {result.abstract && (
+                                                                            <div className="web-result-abstract">
+                                                                                {result.abstract}
+                                                                            </div>
+                                                                        )}
+                                                                        {result.abstract_url && (
+                                                                            <a 
+                                                                                href={result.abstract_url} 
+                                                                                target="_blank" 
+                                                                                rel="noopener noreferrer"
+                                                                                className="web-result-link"
+                                                                            >
+                                                                                Ver mais
+                                                                            </a>
+                                                                        )}
+                                                                        {result.related_topics && result.related_topics.length > 0 && (
+                                                                            <div className="web-result-topics">
+                                                                                <div className="web-result-topics-title">
+                                                                                    Links Úteis
+                                                                                </div>
+                                                                                {result.related_topics.map((topic, topicIdx) => (
+                                                                                    <div key={topicIdx} className="web-result-topic">
+                                                                                        {topic.url ? (
+                                                                                            <a href={topic.url} target="_blank" rel="noopener noreferrer">
+                                                                                                {topic.text}
+                                                                                            </a>
+                                                                                        ) : (
+                                                                                            topic.text
+                                                                                        )}
+                                                                                    </div>
+                                                                                ))}
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </>
+                                            )}
+
+                                            {message.generationTime && (
+                                                <div className="message-meta">
+                                                    <div className="meta-item">
+                                                        ⚡ {message.generationTime.toFixed(2)}s
+                                                    </div>
+                                                    <div className="meta-item">
+                                                        🕐 {message.timestamp}
+                                                    </div>
+                                                    {message.webSearchPerformed && (
+                                                        <div className="meta-item">
+                                                            🤖 AI + 🌐 Web
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                            
+                            {isLoading && (
+                                <div className="message assistant">
+                                    <div className="message-avatar">E</div>
+                                    <div className="loading-indicator">
+                                        <div className="loading-dot"></div>
+                                        <div className="loading-dot"></div>
+                                        <div className="loading-dot"></div>
+                                    </div>
+                                </div>
+                            )}
+                            <div ref={messagesEndRef} />
+                        </div>
+
+                        <div className="input-area">
+                            <div className="controls-row">
+                                <div className="provider-selector">
+                                    <span className="provider-label">Modelo:</span>
+                                    <button
+                                        className={`provider-option ${provider === 'anthropic' ? 'active' : ''}`}
+                                        onClick={() => setProvider('anthropic')}
+                                        title="Claude Haiku (Anthropic) — rápido, preciso e barato"
+                                    >⚡ Haiku</button>
+                                    <button
+                                        className={`provider-option ${provider === 'ollama' ? 'active' : ''}`}
+                                        onClick={() => setProvider('ollama')}
+                                        title="Roda no seu Ollama local (sem limite de uso)"
+                                    >🖥️ Local</button>
+                                    <button
+                                        className={`provider-option ${provider === 'groq' ? 'active' : ''}`}
+                                        onClick={() => setProvider('groq')}
+                                        title="Roda na nuvem via Groq (rápido, porém com limite de uso)"
+                                    >☁️ Groq</button>
+                                </div>
+                                <div className="web-toggle-container" onClick={toggleWebSearch}>
+                                    <div className="web-toggle-label">
+                                        🤖 Busca IA + Web {webSearchEnabled ? '(Ativada)' : '(Desativada)'}
+                                    </div>
+                                    <div className={`web-toggle-switch ${webSearchEnabled ? 'active' : ''}`}></div>
+                                </div>
+                            </div>
+                            <div className="input-wrapper">
+                                <div className="input-container">
+                                    <textarea
+                                        ref={inputRef}
+                                        className="input-field"
+                                        placeholder="Digite sua pergunta... A IA buscará no grafo + conhecimento próprio + web!"
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        onKeyPress={handleKeyPress}
+                                        disabled={isLoading}
+                                        rows="1"
+                                    />
+                                </div>
+                                <button 
+                                    className="web-search-button"
+                                    onClick={handleWebSearchOnly}
+                                    disabled={isLoading || !input.trim()}
+                                    title="Buscar com IA + Web (sem consultar o grafo)"
+                                >
+                                    <span>🤖</span>
+                                    <span>IA</span>
+                                </button>
+                                <button 
+                                    className="send-button"
+                                    onClick={handleSend}
+                                    disabled={isLoading || !input.trim()}
+                                >
+                                    Enviar
+                                </button>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Segredos e configuração local
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Editor / SO
+.vscode/
+.idea/
+.obsidian/
+.claude/
+.DS_Store
+Thumbs.db
