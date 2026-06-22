@@ -5,6 +5,8 @@ grafo de conhecimento, complementando o [agente conversacional](../agente-llm)
 com uma via de consulta direta — útil para validação manual de queries SPARQL
 e exploração exploratória dos dados pela equipe técnica.
 
+![Editor de consultas SPARQL (ConsultaSparql.py) retornando políticas por país a partir do grafo ELLAS](./docs-print-consulta-sparql.png)
+
 ## Aplicações
 
 | Arquivo | Descrição |
