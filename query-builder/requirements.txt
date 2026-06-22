@@ -1,0 +1,5 @@
+streamlit
+pyvis
+pandas
+requests
+python-dotenv

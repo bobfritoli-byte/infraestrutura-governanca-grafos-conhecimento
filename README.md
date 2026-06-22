@@ -49,6 +49,14 @@ reutilizável além do caso ELLAS.
 │   ├── index.html              # Interface web (SPA)
 │   ├── .env.example            # Modelo de variáveis de ambiente (sem segredos)
 │   └── docs/                   # Documentação técnica complementar do agente
+├── query-builder/           # Apps de consulta/exploração direta via SPARQL
+│   ├── ConsultaSparql.py        # Editor livre de consultas SPARQL (Streamlit)
+│   ├── Teste.py                 # Explorador por catálogo de competency questions
+│   ├── EllasBI.py               # Painel simples de indicadores (políticas por país)
+│   ├── sparql_queries.py        # Catálogo de competency questions (Python)
+│   ├── apiService.ts            # Mesmo catálogo, em TypeScript (para frontend)
+│   ├── config.py                # Configuração (lê credenciais do .env, sem valores padrão)
+│   └── .env.example             # Modelo de variáveis de ambiente (sem segredos)
 └── LICENSE
 ```
 
@@ -113,8 +121,13 @@ implantada em servidor físico/on-premises substituindo apenas a etapa 1–2.
   implementação completa desta camada: uma interface web que traduz
   perguntas em linguagem natural para consultas SPARQL via LLM, executa a
   consulta contra o GraphDB e apresenta o resultado de forma estruturada.
-- Veja [`agente-llm/README.md`](./agente-llm/README.md) para instruções de
+  Veja [`agente-llm/README.md`](./agente-llm/README.md) para instruções de
   instalação e configuração.
+- A pasta [`query-builder/`](./query-builder) complementa essa camada com
+  apps de consulta e exploração direta do grafo (editor SPARQL livre,
+  explorador por catálogo de *competency questions* e um painel simples de
+  indicadores) — úteis para validação manual de queries e exploração técnica
+  dos dados. Veja [`query-builder/README.md`](./query-builder/README.md).
 
 ## Citação
 
