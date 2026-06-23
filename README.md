@@ -57,6 +57,10 @@ reutilizável além do caso ELLAS.
 │   ├── apiService.ts            # Mesmo catálogo, em TypeScript (para frontend)
 │   ├── config.py                # Configuração (lê credenciais do .env, sem valores padrão)
 │   └── .env.example             # Modelo de variáveis de ambiente (sem segredos)
+├── swagger/                 # API REST (Flask + flask-restx) com Swagger/OpenAPI
+│   ├── app2.py                  # API com as rotas /sparql/query_initiatives e /sparql/query_policies
+│   ├── config.py                # Configuração (lê credenciais do .env, sem valores padrão)
+│   └── .env.example             # Modelo de variáveis de ambiente (sem segredos)
 └── LICENSE
 ```
 
@@ -114,6 +118,11 @@ implantada em servidor físico/on-premises substituindo apenas a etapa 1–2.
   consultas SPARQL contra o GraphDB e retorne os resultados em JSON.
 - Documentar os endpoints via Swagger/OpenAPI, expondo uma interface de
   consulta autodescritiva para consumidores externos.
+- A pasta [`swagger/`](./swagger) deste repositório contém uma implementação
+  de referência dessa camada: uma API Flask com dois endpoints de exemplo
+  (`/sparql/query_initiatives` e `/sparql/query_policies`), com documentação
+  Swagger/OpenAPI gerada automaticamente via flask-restx. Veja
+  [`swagger/README.md`](./swagger/README.md) para instruções.
 
 ### 5. Interface de consulta e agente conversacional (LLM)
 
