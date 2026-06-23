@@ -1,0 +1,697 @@
+{
+  "baseIRI": "http://example.com/base/",
+  "namespaces": {
+    "Ellas": "http://www.semanticweb.org/pedro/ontologies/2022/11/Ellas#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "subjectMappings": [
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "initiativeSocialmediaLink"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_social_media_link(s)",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "initiativeDataSource"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_data_source",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "startDate"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Intiative_start_date",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "finishDate"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Intiative_finish_date",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "hasCountry"
+            }
+          },
+          "values": [
+            {
+              "transformation": {
+                "expression": "Ellas",
+                "language": "prefix"
+              },
+              "valueSource": {
+                "columnName": "Initiative_country",
+                "source": "column"
+              },
+              "valueType": {
+                "propertyMappings": [],
+                "type": "iri",
+                "typeMappings": []
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "hasCity"
+            }
+          },
+          "values": [
+            {
+              "transformation": {
+                "expression": "Ellas",
+                "language": "prefix"
+              },
+              "valueSource": {
+                "columnName": "Initiative_city",
+                "source": "column"
+              },
+              "valueType": {
+                "propertyMappings": [],
+                "type": "iri",
+                "typeMappings": []
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "hasFundingOrganization"
+            }
+          },
+          "values": [
+            {
+              "transformation": {
+                "expression": "Ellas",
+                "language": "prefix"
+              },
+              "valueSource": {
+                "columnName": "Initiative_funding_organization_name (s)",
+                "source": "column"
+              },
+              "valueType": {
+                "propertyMappings": [],
+                "type": "iri",
+                "typeMappings": []
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "rdfs",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "label"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_name",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "organizationSector"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_organization_sector",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "status"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_status",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "hasTargetAudience"
+            }
+          },
+          "values": [
+            {
+              "transformation": {
+                "expression": "Ellas",
+                "language": "prefix"
+              },
+              "valueSource": {
+                "columnName": "Initiative_target_audicence_age",
+                "source": "column"
+              },
+              "valueType": {
+                "propertyMappings": [],
+                "type": "iri",
+                "typeMappings": []
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "hasTargetAudience"
+            }
+          },
+          "values": [
+            {
+              "transformation": {
+                "expression": "Ellas",
+                "language": "prefix"
+              },
+              "valueSource": {
+                "columnName": "Initiative_target_audience_gender",
+                "source": "column"
+              },
+              "valueType": {
+                "propertyMappings": [],
+                "type": "iri",
+                "typeMappings": []
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "hasTargetAudience"
+            }
+          },
+          "values": [
+            {
+              "transformation": {
+                "expression": "Ellas",
+                "language": "prefix"
+              },
+              "valueSource": {
+                "columnName": "Initiative_target_audicence_educational_level",
+                "source": "column"
+              },
+              "valueType": {
+                "propertyMappings": [],
+                "type": "iri",
+                "typeMappings": []
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "Ellas",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "Initiative_name",
+          "source": "column"
+        }
+      },
+      "typeMappings": [
+        {
+          "transformation": {
+            "expression": "Ellas",
+            "language": "prefix"
+          },
+          "valueSource": {
+            "source": "constant",
+            "constant": "Initiative"
+          }
+        },
+        {
+          "transformation": {
+            "expression": "Ellas",
+            "language": "prefix"
+          },
+          "valueSource": {
+            "columnName": "Initiative_type",
+            "source": "column"
+          }
+        }
+      ]
+    },
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "rdfs",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "label"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_country",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "Ellas",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "Initiative_country",
+          "source": "column"
+        }
+      },
+      "typeMappings": [
+        {
+          "transformation": {
+            "expression": "Ellas",
+            "language": "prefix"
+          },
+          "valueSource": {
+            "source": "constant",
+            "constant": "Country"
+          }
+        }
+      ]
+    },
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "rdfs",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "label"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_city",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "Ellas",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "Initiative_city",
+          "source": "column"
+        }
+      },
+      "typeMappings": [
+        {
+          "transformation": {
+            "expression": "Ellas",
+            "language": "prefix"
+          },
+          "valueSource": {
+            "source": "constant",
+            "constant": "City"
+          }
+        }
+      ]
+    },
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "rdfs",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "label"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_funding_organization_name (s)",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        },
+        {
+          "property": {
+            "transformation": {
+              "expression": "Ellas",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "fundingOrganizationSector"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_funding_organization_sector",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "Ellas",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "Initiative_funding_organization_name (s)",
+          "source": "column"
+        }
+      },
+      "typeMappings": [
+        {
+          "transformation": {
+            "expression": "Ellas",
+            "language": "prefix"
+          },
+          "valueSource": {
+            "source": "constant",
+            "constant": "FundingOrganization"
+          }
+        }
+      ]
+    },
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "rdfs",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "label"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_target_audience_gender",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "Ellas",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "Initiative_target_audience_gender",
+          "source": "column"
+        }
+      },
+      "typeMappings": [
+        {
+          "transformation": {
+            "expression": "Ellas",
+            "language": "prefix"
+          },
+          "valueSource": {
+            "source": "constant",
+            "constant": "TargetAudienceGender"
+          }
+        }
+      ]
+    },
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "rdfs",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "label"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_target_audicence_age",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "Ellas",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "Initiative_target_audicence_age",
+          "source": "column"
+        }
+      },
+      "typeMappings": [
+        {
+          "transformation": {
+            "expression": "Ellas",
+            "language": "prefix"
+          },
+          "valueSource": {
+            "source": "constant",
+            "constant": "TargetAudienceAge"
+          }
+        }
+      ]
+    },
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "rdfs",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "label"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "Initiative_target_audicence_educational_level",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "Ellas",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "Initiative_target_audicence_educational_level",
+          "source": "column"
+        }
+      },
+      "typeMappings": [
+        {
+          "transformation": {
+            "expression": "Ellas",
+            "language": "prefix"
+          },
+          "valueSource": {
+            "source": "constant",
+            "constant": "TargetAudienceEducationalLevel"
+          }
+        }
+      ]
+    }
+  ]
+}

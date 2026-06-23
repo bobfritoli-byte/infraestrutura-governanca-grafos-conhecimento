@@ -49,6 +49,12 @@ reutilizável além do caso ELLAS.
 │   ├── index.html              # Interface web (SPA)
 │   ├── .env.example            # Modelo de variáveis de ambiente (sem segredos)
 │   └── docs/                   # Documentação técnica complementar do agente
+├── pipeline-pentaho/        # Orquestração Pentaho + scripts de ingestão/triplificação (OntoRefine)
+│   ├── *.kjb                    # Jobs Pentaho Kettle (orquestração)
+│   ├── Exe/                     # Scripts .bat (OntoRefine CLI) + mapeamento semântico (mapping.json)
+│   ├── EnviarArquvosRDF.py      # Grava o RDF gerado no GraphDB
+│   ├── config.py                # Configuração (lê credenciais do .env, sem valores padrão)
+│   └── .env.example             # Modelo de variáveis de ambiente (sem segredos)
 ├── query-builder/           # Apps de consulta/exploração direta via SPARQL
 │   ├── ConsultaSparql.py        # Editor livre de consultas SPARQL (Streamlit)
 │   ├── Teste.py                 # Explorador por catálogo de competency questions
@@ -107,10 +113,11 @@ implantada em servidor físico/on-premises substituindo apenas a etapa 1–2.
   resultado triplificado no GraphDB.
 - Instalar Python no servidor para os scripts auxiliares de pré-processamento
   que complementam o pipeline.
-
-> **Status:** os arquivos de transformação do Pentaho (`.ktr`/`.kjb`) usados
-> na instância ELLAS ainda não foram adicionados a este repositório —
-> pendência a resolver em uma próxima atualização.
+- A pasta [`pipeline-pentaho/`](./pipeline-pentaho) deste repositório contém
+  os jobs Pentaho Kettle e os scripts (OntoRefine CLI + Python) usados na
+  instância validada — orientados a linha de comando, por simplicidade. Veja
+  [`pipeline-pentaho/README.md`](./pipeline-pentaho/README.md) para o detalhe
+  de cada etapa e instruções de configuração.
 
 ### 4. Exposição por API
 
