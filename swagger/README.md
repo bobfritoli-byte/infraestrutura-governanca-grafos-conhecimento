@@ -15,6 +15,8 @@ JSON, documentada automaticamente via Swagger/OpenAPI.
 A documentação interativa (Swagger UI) é gerada automaticamente pelo
 flask-restx a partir das definições em `app2.py`.
 
+![Swagger UI gerado automaticamente para o endpoint /sparql/query_initiatives](./docs-print-swagger-ui.png)
+
 > **Nota:** a rota `/` neste exemplo tenta renderizar um `templates/index.html`
 > próprio (uma página inicial customizada usada na instância ELLAS), que não
 > está incluído neste repositório. Para usar apenas a API e o Swagger UI
