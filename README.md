@@ -155,6 +155,19 @@ o Caso da Plataforma ELLAS. Dissertação (Mestrado em Computação Aplicada) �
 Universidade Tecnológica Federal do Paraná, Curitiba, 2026.
 ```
 
+## Publicações relacionadas
+
+Este produto também é fundamentado nas seguintes publicações anteriores do autor:
+
+FRITOLI, Rodgers; BERARDI, Rita Cristina Galarraga. Infraestrutura da arquitetura
+e pipeline de automação da governança de um grafo de conhecimento com fontes de
+dados estruturadas e não estruturadas: uma aplicação na plataforma ELLAS. In:
+Anais do Workshop Ontobrás 2024.
+
+FRITOLI, Rodgers; BERARDI, Rita Cristina Galarraga. Arquitectura y pipeline para
+automatizar el gobierno del grafo de conocimiento de la red ELLAS. Interfases,
+2023. DOI: https://doi.org/10.26439/interfases2023.n018.6623
+
 ## Licença
 
 Distribuído sob a licença MIT — veja [LICENSE](./LICENSE).
